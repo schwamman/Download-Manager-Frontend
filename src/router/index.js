@@ -34,6 +34,14 @@ function configRoutes () {
       redirect: '/downloads',
       name: 'Home',
       component: TheContainer,
+      beforeEnter: (to, from, next) => {
+        const loggedIn = localStorage.getItem('user')
+        if (loggedIn) {
+          next()
+        } else {
+          next('/pages/login')
+        }
+      },
       children: [
         {
           path: 'downloads',
